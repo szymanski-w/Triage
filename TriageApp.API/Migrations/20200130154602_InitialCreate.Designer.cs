@@ -8,7 +8,7 @@ using TriageApp.API.Data;
 namespace TriageApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200130151257_InitialCreate")]
+    [Migration("20200130154602_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
