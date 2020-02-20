@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TriageApp.API.Data;
+using TriageApp.API.Dtos;
 using TriageApp.API.Models;
 
 namespace TriageApp.API.Controllers
@@ -17,19 +18,19 @@ namespace TriageApp.API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(string username, string password)
+        public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
-            username = username.ToLower();
+            userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
 
-            if (await _repository.UserExists(username))
+            if (await _repository.UserExists(userForRegisterDto.Username))
                 return BadRequest("User already exists");
 
             var userToCreate = new User
             {
-                Username = username
+                Username = userForRegisterDto.Username
             };
 
-            var createdUser = await _repository.Register(userToCreate, password);
+            var createdUser = await _repository.Register(userToCreate, userForRegisterDto.Password);
 
             return StatusCode(201);
         }
