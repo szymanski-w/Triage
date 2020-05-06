@@ -31,7 +31,7 @@ namespace TriageApp.API.Controllers
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
 
             if (await _repository.UserExists(userForRegisterDto.Username))
-                return BadRequest("User already exists");
+                return BadRequest("User already exists!");
 
             var userToCreate = new User
             {
